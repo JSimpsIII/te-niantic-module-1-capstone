@@ -28,10 +28,8 @@ public class VendingMachine
 
             if (option.equals("1")) {
                 viewItems();
-                break;
             } else if (option.equals("2")) {
                 purchase();
-                break;
             } else if (option.equals("3")) {
                 break;
             } else {
@@ -65,9 +63,13 @@ public class VendingMachine
             purchase.feedMoney(money);
             purchase();
         } else if (option.equals("2")) {
-            UserInput.getItemSelection();
+            UserOutput.displayInventory(inventory);
+            System.out.println();
+            String item = UserInput.getItemSelection();
+            purchase.makeSelection(inventory, item);
+            purchase.transaction();
+            System.out.println("You have purchased " + item + ". Your remaining balance is " + purchase.getMoneyAvailable());
         } else if (option.equals("3")) {
-
         }
 
         //System.out.println("Current Money Provided: " + payment);

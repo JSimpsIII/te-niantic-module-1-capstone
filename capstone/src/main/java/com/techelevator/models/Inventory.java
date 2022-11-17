@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Inventory {
-
     private List<Product> products = new ArrayList<>();
 
     public List<Product> getProducts() {

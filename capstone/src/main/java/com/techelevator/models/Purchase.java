@@ -1,28 +1,29 @@
 package com.techelevator.models;
 
-import com.techelevator.UI.UserInput;
 import com.techelevator.models.products.Product;
 
 public class Purchase {
-    private static double moneyProvided = 0;
+    private static double moneyAvailable = 0;
     private double totalCost = 0;
 
-    public static double getMoneyProvided() {
-        return moneyProvided;
+    public static void setMoneyAvailable(double moneyAvailable) {
+        Purchase.moneyAvailable = moneyAvailable;
+    }
+
+    public static double getMoneyAvailable() {
+        return moneyAvailable;
     }
 
     public Purchase() {
-        this.moneyProvided = moneyProvided;
+        this.moneyAvailable = moneyAvailable;
     }
 
     public double feedMoney(double money) {
-        moneyProvided += money;
-        return moneyProvided;
+        moneyAvailable += money;
+        return moneyAvailable;
     }
 
-    public double selectionPrice(Inventory inventory) {
-
-        String item = UserInput.getItemSelection();
+    public double makeSelection(Inventory inventory, String item) {
         double price = 0;
 
         for (Product product : inventory.getProducts()) {
@@ -30,21 +31,19 @@ public class Purchase {
             if(item.equals(product.getRowId())){
                 price = product.getPrice();
                 totalCost += price;
+                product.setQuantity(product.getQuantity() - 1);
             }
         }
         return totalCost;
     }
 
     public double transaction() {
-
-        double changeDue = 0;
-
-        if (moneyProvided >= totalCost) {
-            changeDue = moneyProvided - totalCost;
-        } else if (moneyProvided < totalCost) {
+        if (moneyAvailable >= totalCost) {
+            moneyAvailable -= totalCost;
+        } else if (moneyAvailable < totalCost) {
             //insert insufficient funds exception
         }
-        return changeDue;
+        return moneyAvailable;
     }
 
 }
