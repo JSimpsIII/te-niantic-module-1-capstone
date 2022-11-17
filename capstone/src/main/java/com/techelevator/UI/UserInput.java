@@ -17,20 +17,24 @@ public class UserInput {
 
     public static String getItemSelection() {
 
-        System.out.println("Please select an item: ");
+        System.out.println("Please enter item ID: ");
         String selection = input.nextLine();
 
         return selection;
 
     }
 
-    public static BigDecimal getPayment() {
-
-        System.out.println("Pleae enter payment amount: $");
+    public static double getPayment() {
         String amount = input.nextLine();
 
-        return new BigDecimal(amount);
+        return Double.parseDouble(amount);
 
     }
 
+    public static String readyToPay() {
+        System.out.println("Are you ready to make a purchase(Y/N) or go back (Menu)?");
+        String selection = input.nextLine();
+
+        return selection;
+    }
 }

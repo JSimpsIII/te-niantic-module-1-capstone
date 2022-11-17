@@ -30,7 +30,7 @@ public class Inventory {
             while (reader.hasNextLine()) {
 
                 String line = reader.nextLine();
-                String[] columns = line.split("|");
+                String[] columns = line.split("\\|");
 
                 String id = columns[0];
                 String name = columns[1];
@@ -39,7 +39,6 @@ public class Inventory {
 
                 Product product = new Product(id, name, price, productType);
                 products.add(product);
-
             }
 
 
