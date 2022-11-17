@@ -6,6 +6,7 @@ public class Product {
     private String name;
     private double price;
     private String productType;
+    private int quantity;
 
     public Product() {
 
@@ -16,6 +17,7 @@ public class Product {
         this.name = name;
         this.price = price;
         this.productType = productType;
+        this.quantity = 5;
     }
 
     public String getRowId() {
@@ -48,5 +50,13 @@ public class Product {
 
     public void setProductType(String productType) {
         this.productType = productType;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }
