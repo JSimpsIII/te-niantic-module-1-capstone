@@ -68,8 +68,9 @@ public class VendingMachine
             String item = UserInput.getItemSelection();
             purchase.makeSelection(inventory, item);
             purchase.transaction();
-            System.out.println("You have purchased " + item + ". Your remaining balance is " + purchase.getMoneyAvailable());
         } else if (option.equals("3")) {
+            System.out.println("Your change is $" + purchase.getMoneyAvailable());
+            System.out.println(); //change in coins
         }
 
         //System.out.println("Current Money Provided: " + payment);

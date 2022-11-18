@@ -33,9 +33,17 @@ public class UserOutput {
         System.out.println("*********************");
         System.out.println();
 
+
+
         for (Product product : inventory.getProducts()) {
-            System.out.println(product.getRowId() + ") " + product.getName() + " $" + product.getPrice()
-                    + " In Stock: " + product.getQuantity());
+
+            if(product.getQuantity() == 0){
+                System.out.println(product.getRowId() + ") " + product.getName() + " $" + product.getPrice()
+                        + " SOLD OUT");
+            } else if (product.getQuantity() > 0) {
+                System.out.println(product.getRowId() + ") " + product.getName() + " $" + product.getPrice()
+                        + " In Stock: " + product.getQuantity());
+            }
         }
     }
 

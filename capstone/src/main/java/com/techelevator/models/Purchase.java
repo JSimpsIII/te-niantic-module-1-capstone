@@ -32,6 +32,19 @@ public class Purchase {
                 price = product.getPrice();
                 totalCost += price;
                 product.setQuantity(product.getQuantity() - 1);
+
+                if (product.getProductType().equals("Chip")) {
+                    System.out.println("Crunch Crunch, Yum!");
+                } else if (product.getProductType().equals("Candy")) {
+                    System.out.println("Munch Munch, Yum!");
+                } else if (product.getProductType().equals("Drink")) {
+                    System.out.println("Glug Glug, Yum!");
+                } else if (product.getProductType().equals("Gum")) {
+                    System.out.println("Chew Chew, Yum!");
+                }
+
+                System.out.println("You have purchased " + product.getName() + " for $" + product.getPrice() + ".");
+
             }
         }
         return totalCost;
@@ -43,7 +56,35 @@ public class Purchase {
         } else if (moneyAvailable < totalCost) {
             //insert insufficient funds exception
         }
+        System.out.println("Your remaining balance is $" + getMoneyAvailable());
         return moneyAvailable;
+    }
+
+    public double change() {
+
+        final double QUARTER = 0.25;
+        final double DIME = 0.10;
+        final double NICKEL = 0.05;
+        final double PENNY = 0.01;
+
+        double change = 0;
+        double remainder = 0;
+
+        boolean isRemainderZero = true;
+
+        if (getMoneyAvailable() > QUARTER) {
+            remainder = getMoneyAvailable() % QUARTER;
+            if (remainder > DIME){
+                remainder = getMoneyAvailable() % DIME;
+            } if (remainder > NICKEL){
+                remainder = getMoneyAvailable() % NICKEL;
+            } if (remainder > PENNY){
+                remainder = getMoneyAvailable() % PENNY;
+            }
+
+
+            System.out.println("You will receive " + change + " amount of quarters");
+        }
     }
 
 }
