@@ -1,5 +1,6 @@
 package com.techelevator.models;
 
+import com.techelevator.models.file_io.Logger;
 import com.techelevator.models.products.Product;
 
 public class Purchase {
@@ -51,6 +52,7 @@ public class Purchase {
                 }
 
                 System.out.println("You have purchased " + product.getName() + " for $" + product.getPrice() + ".");
+                Logger.logMessage(product.getName() + " $" + product.getPrice());
             }
         }
         return totalCost;

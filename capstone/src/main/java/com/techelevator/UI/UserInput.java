@@ -25,11 +25,12 @@ public class UserInput {
     }
 
     public static double getPayment() {
-        System.out.println("Please Enter Whole Dollar Amount: ");
+        System.out.println("Please Enter Whole Dollar Amount (1, 5, 10, or 20 dollar bills only): ");
         double amount = Double.parseDouble(input.nextLine());
-        while (amount % 1 != 0 || amount < 0) {
-            System.out.println("Money inserted needs to be whole dollar amount");
-            System.out.println("Please Enter Whole Dollar Amount: ");
+        while (amount != 1 && amount != 5 && amount != 10 && amount != 20) {
+            System.out.println("This machine only accepts 1's, 5's, 10's, and 20's");
+            System.out.println();
+            System.out.println("Please Enter Whole Dollar Amount (1, 5, 10, or 20 dollar bills only): ");
             amount = Double.parseDouble(input.nextLine());
         }
         return amount;
@@ -45,10 +46,19 @@ public class UserInput {
     }
 
 
-    public static String continueOrNot() {
+    public static boolean continueOrNot() {
         System.out.println("Do you want to add more money(Y/N)?");
         String selection = input.nextLine();
-
-        return selection;
+        boolean continueLoop = true;
+        while (!selection.equals("Y") && !selection.equals("N")) {
+            System.out.println("Invalid option, please try again");
+            System.out.println();
+            System.out.println("Do you want to add more money(Y/N)?");
+            selection = input.nextLine();
+        }
+        if (selection.equals("N")) {
+            continueLoop = false;
+        }
+        return continueLoop;
     }
 }

@@ -63,12 +63,8 @@ public class VendingMachine
             boolean continueLoop = true;
             while (continueLoop) {
                 money = UserInput.getPayment();
-
                 purchase.feedMoney(money);
-                String wantsToContinue = UserInput.continueOrNot();
-                if (wantsToContinue.equals("N")){
-                    continueLoop = false;
-                }
+                continueLoop = UserInput.continueOrNot();
             }
             purchase();
         } else if (option.equals("2")) {
