@@ -67,30 +67,33 @@ public class Purchase {
         return moneyAvailable;
     }
 
-    public void change() {
+    public String change() {
 
-        final double QUARTER = 0.25;
-        final double DIME = 0.10;
-        final double NICKEL = 0.05;
-        final double PENNY = 0.01;
+        final int QUARTER = 25;
+        final int DIME = 10;
+        final int NICKEL = 5;
 
-        double changeDue = ( (double)((int)Math.round((getMoneyAvailable())*100)) / 100.0 );
-        double modQuarters = ( (double)((int) Math.round((changeDue % QUARTER)*100)) / 100.0 );
-        double modDimes = ( (double)((int) Math.round((modQuarters % DIME)*100)) / 100.0 );
-        double modNickels = ( (double)((int) Math.round((modQuarters % NICKEL)*100)) / 100.0 );
-        double modPennies = ( (double)((int) Math.round((modQuarters % PENNY)*100)) / 100.0 );
+        int changeDue = (int)(getMoneyAvailable()*100);
+        int modQuarters = changeDue % QUARTER;
+        int modDimes = modQuarters % DIME;
+        int modNickels = modQuarters % NICKEL;
 
-        int numQuarters = (int)((changeDue - modQuarters) / (QUARTER));
-        int numDimes = (int)((modQuarters - modDimes) / (DIME));
-        int numNickels = (int)((modDimes - modNickels) / (NICKEL));
-        int numPennies = (int)((modNickels - modPennies) / (PENNY));
+        int numQuarters = (changeDue - modQuarters) / QUARTER;
+        int numDimes = (modQuarters - modDimes) / DIME;
+        int numNickels = (modDimes - modNickels) / NICKEL;
 
-        System.out.println("\nTotal amount of change to give: $" + changeDue);
-        System.out.println("Number of quarters to give: " + numQuarters);
-        System.out.println("Number of dimes to give: " + numDimes);
-        System.out.println("Number of nickels to give: " + numNickels);
-        System.out.println("Number of pennies to give: " + numPennies);
+//        System.out.println("\nTotal amount of change to give: $" + changeDue);
+//        System.out.println("Number of quarters to give: " + numQuarters);
+//        System.out.println("Number of dimes to give: " + numDimes);
+//        System.out.println("Number of nickels to give: " + numNickels);
+//        System.out.println("Number of pennies to give: " + numPennies);
+
         moneyAvailable = 0;
+
+        double displayChangeDue = (double) changeDue / 100;
+
+        return "\nTotal amount of change to give: $" + displayChangeDue + "\nNumber of quarters to give: " + numQuarters +
+                "\nNumber of dimes to give: " + numDimes + "\nNumber of nickels to give: " + numNickels;
     }
 
 }

@@ -78,7 +78,7 @@ public class VendingMachine
             purchase();
         } else if (option.equals("3")) {
             System.out.println(); //change in coins
-            purchase.change();
+            System.out.println(purchase.change());;
         }
 
         //System.out.println("Current Money Provided: " + payment);

@@ -1,5 +1,6 @@
 package com.techelevator.models;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -56,10 +57,44 @@ public class PurchaseTest {
     }
 
     @Test
-    public void transaction() {
+    public void transaction_ShouldSubtract_TotalCost_From_MoneyAvailable() {
+        // arrange
+        Purchase.setMoneyAvailable(10);
+        purchase.setTotalCost(3.05);
+        double expected = 6.95;
+
+        //act
+        double actual = purchase.transaction();
+
+        //assert
+        assertEquals("Because total cost is subtracted from money available", expected, actual, 0.01);
     }
 
     @Test
-    public void change() {
+    public void change_ShouldReturn_CoinsGiven() {
+        // arrange
+        Inventory inventory = new Inventory();
+        inventory.loadInventory();
+        Purchase.setMoneyAvailable(2.15);
+
+        double changeDue = 2.15;
+        int numQuarters = 8;
+        int numDimes = 1;
+        int numNickels = 1;
+
+        String expected = "\nTotal amount of change to give: $" + changeDue + "\nNumber of quarters to give: "
+                + numQuarters + "\nNumber of dimes to give: " + numDimes
+                + "\nNumber of nickels to give: " + numNickels;
+
+        //act
+        String actual = purchase.change();
+
+        //assert
+        assertEquals("Because the user should receive the correct amount of change", expected, actual);
+    }
+
+    @After
+    public void clear(){
+        Purchase.setMoneyAvailable(0);
     }
 }
