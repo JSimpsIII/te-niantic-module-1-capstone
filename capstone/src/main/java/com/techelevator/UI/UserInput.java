@@ -25,9 +25,14 @@ public class UserInput {
     }
 
     public static double getPayment() {
-        String amount = input.nextLine();
-
-        return Double.parseDouble(amount);
+        System.out.println("Please Enter Whole Dollar Amount: ");
+        double amount = Double.parseDouble(input.nextLine());
+        while (amount % 1 != 0 || amount < 0) {
+            System.out.println("Money inserted needs to be whole dollar amount");
+            System.out.println("Please Enter Whole Dollar Amount: ");
+            amount = Double.parseDouble(input.nextLine());
+        }
+        return amount;
 
     }
 
