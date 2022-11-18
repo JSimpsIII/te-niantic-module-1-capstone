@@ -6,6 +6,14 @@ public class Purchase {
     private static double moneyAvailable = 0;
     private double totalCost = 0;
 
+    public double getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTotalCost(double totalCost) {
+        this.totalCost = totalCost;
+    }
+
     public static void setMoneyAvailable(double moneyAvailable) {
         Purchase.moneyAvailable = moneyAvailable;
     }
@@ -51,6 +59,7 @@ public class Purchase {
     public double transaction() {
         if (moneyAvailable >= totalCost) {
             moneyAvailable -= totalCost;
+            totalCost = 0;
         } else if (moneyAvailable < totalCost) {
             //insert insufficient funds exception
         }

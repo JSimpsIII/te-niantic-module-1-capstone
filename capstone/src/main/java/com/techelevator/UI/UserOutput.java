@@ -53,7 +53,7 @@ public class UserOutput {
         System.out.println("Purchase");
         System.out.println("*********************");
         System.out.println();
-        System.out.println("Current money provided: " + Purchase.getMoneyAvailable());
+        System.out.println("Current money provided: $" + Purchase.getMoneyAvailable());
         System.out.println("1) Feed Money");
         System.out.println("2) Select Product");
         System.out.println("3) Finish Transaction");
