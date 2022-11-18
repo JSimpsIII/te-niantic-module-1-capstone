@@ -58,9 +58,16 @@ public class VendingMachine
         String option = UserInput.getMenuSelection();
 
         if (option.equals("1")) {
-            System.out.println("Please Enter Whole Dollar Amount: ");
-            double money = UserInput.getPayment();
-            purchase.feedMoney(money);
+            boolean continueLoop = true;
+            while (continueLoop) {
+                System.out.println("Please Enter Whole Dollar Amount: ");
+                double money = UserInput.getPayment();
+                purchase.feedMoney(money);
+                String wantsToContinue = UserInput.continueOrNot();
+                if (wantsToContinue.equals("N")){
+                    continueLoop = false;
+                }
+            }
             purchase();
         } else if (option.equals("2")) {
             UserOutput.displayInventory(inventory);
@@ -68,9 +75,10 @@ public class VendingMachine
             String item = UserInput.getItemSelection();
             purchase.makeSelection(inventory, item);
             purchase.transaction();
+            purchase();
         } else if (option.equals("3")) {
-            System.out.println("Your change is $" + purchase.getMoneyAvailable());
             System.out.println(); //change in coins
+            purchase.change();
         }
 
         //System.out.println("Current Money Provided: " + payment);

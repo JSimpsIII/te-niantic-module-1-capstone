@@ -27,7 +27,6 @@ public class Purchase {
         double price = 0;
 
         for (Product product : inventory.getProducts()) {
-
             if(item.equals(product.getRowId())){
                 price = product.getPrice();
                 totalCost += price;
@@ -44,7 +43,6 @@ public class Purchase {
                 }
 
                 System.out.println("You have purchased " + product.getName() + " for $" + product.getPrice() + ".");
-
             }
         }
         return totalCost;
@@ -60,31 +58,30 @@ public class Purchase {
         return moneyAvailable;
     }
 
-    public double change() {
+    public void change() {
 
         final double QUARTER = 0.25;
         final double DIME = 0.10;
         final double NICKEL = 0.05;
         final double PENNY = 0.01;
 
-        double change = 0;
-        double remainder = 0;
+        double changeDue = ( (double)((int)Math.round((getMoneyAvailable())*100)) / 100.0 );
+        double modQuarters = ( (double)((int) Math.round((changeDue % QUARTER)*100)) / 100.0 );
+        double modDimes = ( (double)((int) Math.round((modQuarters % DIME)*100)) / 100.0 );
+        double modNickels = ( (double)((int) Math.round((modQuarters % NICKEL)*100)) / 100.0 );
+        double modPennies = ( (double)((int) Math.round((modQuarters % PENNY)*100)) / 100.0 );
 
-        boolean isRemainderZero = true;
+        int numQuarters = (int)((changeDue - modQuarters) / (QUARTER));
+        int numDimes = (int)((modQuarters - modDimes) / (DIME));
+        int numNickels = (int)((modDimes - modNickels) / (NICKEL));
+        int numPennies = (int)((modNickels - modPennies) / (PENNY));
 
-        if (getMoneyAvailable() > QUARTER) {
-            remainder = getMoneyAvailable() % QUARTER;
-            if (remainder > DIME){
-                remainder = getMoneyAvailable() % DIME;
-            } if (remainder > NICKEL){
-                remainder = getMoneyAvailable() % NICKEL;
-            } if (remainder > PENNY){
-                remainder = getMoneyAvailable() % PENNY;
-            }
-
-
-            System.out.println("You will receive " + change + " amount of quarters");
-        }
+        System.out.println("\nTotal amount of change to give: $" + changeDue);
+        System.out.println("Number of quarters to give: " + numQuarters);
+        System.out.println("Number of dimes to give: " + numDimes);
+        System.out.println("Number of nickels to give: " + numNickels);
+        System.out.println("Number of pennies to give: " + numPennies);
+        moneyAvailable = 0;
     }
 
 }

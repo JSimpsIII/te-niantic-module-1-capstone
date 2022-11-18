@@ -32,6 +32,7 @@ public class UserInput {
     }
 
     public static String readyToPay() {
+        System.out.println();
         System.out.println("Are you ready to make a purchase(Y/N) or go back (Menu)?");
         String selection = input.nextLine();
 
@@ -39,5 +40,10 @@ public class UserInput {
     }
 
 
+    public static String continueOrNot() {
+        System.out.println("Do you want to add more money(Y/N)?");
+        String selection = input.nextLine();
 
+        return selection;
+    }
 }
