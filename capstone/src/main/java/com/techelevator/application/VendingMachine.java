@@ -71,6 +71,10 @@ public class VendingMachine
             purchase();
 
         } else if (option.equals("2")) {
+            if (purchase.getMoneyAvailable() == 0){
+                System.out.println("Please insert funds before choosing an item");
+                purchase();
+            }
             UserOutput.displayInventory(inventory);
             System.out.println();
             String item = UserInput.getItemSelection();
@@ -80,7 +84,7 @@ public class VendingMachine
         } else if (option.equals("3")) {
             System.out.println();
             Logger.logMessage("GIVE CHANGE: $" + purchase.getMoneyAvailable() + " $0.00");
-            System.out.println(purchase.change());;
+            System.out.println(purchase.change());
         } else {
             System.out.println("Invalid option, please try again");
             purchase();

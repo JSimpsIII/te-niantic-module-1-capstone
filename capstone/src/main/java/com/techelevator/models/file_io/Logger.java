@@ -10,14 +10,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Logger {
-    private static final String FILE_EXTENSION = ".txt";
-
-    private String directory;
-
-    public Logger(String directory)
-    {
-        this.directory = directory;
-    }
 
     public static void logMessage(String message)
     {

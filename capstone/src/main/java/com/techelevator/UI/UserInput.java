@@ -61,4 +61,11 @@ public class UserInput {
         }
         return continueLoop;
     }
+
+    public static String insufficientFundsSelection(){
+        System.out.println("Insufficient funds, press 1 to insert more money or press 2 to choose another item");
+        String selection = input.nextLine();
+
+        return selection;
+    }
 }

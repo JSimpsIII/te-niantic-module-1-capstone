@@ -1,5 +1,7 @@
 package com.techelevator.models;
 
+import com.techelevator.UI.UserInput;
+import com.techelevator.UI.UserOutput;
 import com.techelevator.models.file_io.Logger;
 import com.techelevator.models.products.Product;
 
@@ -34,30 +36,51 @@ public class Purchase {
 
     public double makeSelection(Inventory inventory, String item) {
         double price = 0;
+        String newSelection = "";
+        Product matchedItem = new Product();
 
-        for (Product product : inventory.getProducts()) {
-            if(item.equals(product.getRowId())){
-                price = product.getPrice();
-                totalCost += price;
-                product.setQuantity(product.getQuantity() - 1);
+        for(Product product : inventory.getProducts()) {
+            if(item.equals(product.getRowId())) {
+                matchedItem = product;
+                price = matchedItem.getPrice();
+                if (price > getMoneyAvailable()) {
+                    String selection = UserInput.insufficientFundsSelection();
+                    if (selection.equals("1")){
+                        UserOutput.displayPurchase();
+                    } else if (selection.equals("2")){
+                        UserOutput.displayInventory(inventory);
+                        newSelection = UserInput.getItemSelection();
+                        makeSelection(inventory, newSelection);
+                    }
+                } else {
+                    totalCost += price;
+                    matchedItem.setQuantity(matchedItem.getQuantity() - 1);
 
-                if (product.getProductType().equals("Chip")) {
-                    System.out.println("Crunch Crunch, Yum!");
-                } else if (product.getProductType().equals("Candy")) {
-                    System.out.println("Munch Munch, Yum!");
-                } else if (product.getProductType().equals("Drink")) {
-                    System.out.println("Glug Glug, Yum!");
-                } else if (product.getProductType().equals("Gum")) {
-                    System.out.println("Chew Chew, Yum!");
+                    if (matchedItem.getProductType().equals("Chip")) {
+                        System.out.println("Crunch Crunch, Yum!");
+                    } else if (matchedItem.getProductType().equals("Candy")) {
+                        System.out.println("Munch Munch, Yum!");
+                    } else if (matchedItem.getProductType().equals("Drink")) {
+                        System.out.println("Glug Glug, Yum!");
+                    } else if (matchedItem.getProductType().equals("Gum")) {
+                        System.out.println("Chew Chew, Yum!");
+                    }
+                    System.out.println("You have purchased " + matchedItem.getName() + " for $" + matchedItem.getPrice() + ".");
+                    Logger.logMessage(matchedItem.getName() + " " + matchedItem.getRowId() + " $" + matchedItem.getPrice()
+                            + " $" + (getMoneyAvailable() - matchedItem.getPrice()) );
                 }
-
-                System.out.println("You have purchased " + product.getName() + " for $" + product.getPrice() + ".");
-                Logger.logMessage(product.getName() + " " + product.getRowId() + " $" + product.getPrice()
-                            + " $" + (getMoneyAvailable() - product.getPrice()) );
+                return totalCost;
             }
         }
-        return totalCost;
+
+            System.out.println("Item doesn't exist, please choose a different item: ");
+            String stringReselection = UserInput.getItemSelection();
+            makeSelection(inventory, stringReselection);
+
+            return 0;
     }
+
+
 
     public double transaction() {
         if (moneyAvailable >= totalCost) {
