@@ -52,7 +52,8 @@ public class Purchase {
                 }
 
                 System.out.println("You have purchased " + product.getName() + " for $" + product.getPrice() + ".");
-                Logger.logMessage(product.getName() + " $" + product.getPrice());
+                Logger.logMessage(product.getName() + " " + product.getRowId() + " $" + product.getPrice()
+                            + " $" + (getMoneyAvailable() - product.getPrice()) );
             }
         }
         return totalCost;
@@ -67,6 +68,7 @@ public class Purchase {
         }
         System.out.println("Your remaining balance is $" + getMoneyAvailable());
         return moneyAvailable;
+
     }
 
     public String change() {

@@ -5,6 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Logger {
@@ -19,7 +21,7 @@ public class Logger {
 
     public static void logMessage(String message)
     {
-        File logFile = new File("Users\\Student\\workspace\\module-1-week-4-pair-5\\capstone\\src\\main\\resources\\log.txt");
+        File logFile = new File("src/main/resources/log.txt");
 
         try(FileWriter fileWriter = new FileWriter(logFile,true);
             PrintWriter writer = new PrintWriter(fileWriter)
@@ -27,12 +29,20 @@ public class Logger {
         {
             // open the log file to append and write the message
             // format: <current time> <message>
-            String timeStamp = LocalDate.now().toString();
-            writer.write(timeStamp + " " + message);
+            String dateStamp = LocalDate.now().toString();
+
+            String pattern = "hh:mm:ss a";
+            LocalTime now = LocalTime.now();
+            String timeStamp = (now.format(DateTimeFormatter.ofPattern(pattern)));
+
+
+            writer.println(dateStamp + " " + timeStamp + " " + message);
         }
         catch (IOException ex)
         {
             // swallow the exception
         }
+
     }
+
 }

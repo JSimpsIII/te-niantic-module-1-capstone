@@ -4,6 +4,7 @@ import com.techelevator.UI.UserInput;
 import com.techelevator.UI.UserOutput;
 import com.techelevator.models.Inventory;
 import com.techelevator.models.Purchase;
+import com.techelevator.models.file_io.Logger;
 
 public class VendingMachine
 {
@@ -42,11 +43,11 @@ public class VendingMachine
     private void viewItems(){
         String option = UserInput.readyToPay();
 
-        if (option.equals("Y")) {
+        if (option.equalsIgnoreCase("Y")) {
             purchase();
-        } else if (option.equals("N")) {
+        } else if (option.equalsIgnoreCase("N")) {
             viewItems();
-        } else if (option.equals("Menu")) {
+        } else if (option.equalsIgnoreCase("Menu")) {
             UserOutput.displayHomeScreenMenu();
         } else {
                 System.out.println("Invalid option, please try again");
@@ -65,8 +66,10 @@ public class VendingMachine
                 money = UserInput.getPayment();
                 purchase.feedMoney(money);
                 continueLoop = UserInput.continueOrNot();
+                Logger.logMessage("FEED MONEY $" + money + " $" + purchase.getMoneyAvailable());
             }
             purchase();
+
         } else if (option.equals("2")) {
             UserOutput.displayInventory(inventory);
             System.out.println();
@@ -75,12 +78,12 @@ public class VendingMachine
             purchase.transaction();
             purchase();
         } else if (option.equals("3")) {
-            System.out.println(); //change in coins
+            System.out.println();
+            Logger.logMessage("GIVE CHANGE: $" + purchase.getMoneyAvailable() + " $0.00");
             System.out.println(purchase.change());;
+        } else {
+            System.out.println("Invalid option, please try again");
+            purchase();
         }
-
-        //System.out.println("Current Money Provided: " + payment);
-
-
     }
 }

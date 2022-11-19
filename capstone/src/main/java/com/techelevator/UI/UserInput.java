@@ -50,13 +50,13 @@ public class UserInput {
         System.out.println("Do you want to add more money(Y/N)?");
         String selection = input.nextLine();
         boolean continueLoop = true;
-        while (!selection.equals("Y") && !selection.equals("N")) {
+        while (!selection.equalsIgnoreCase("Y") && !selection.equalsIgnoreCase("N")) {
             System.out.println("Invalid option, please try again");
             System.out.println();
             System.out.println("Do you want to add more money(Y/N)?");
             selection = input.nextLine();
         }
-        if (selection.equals("N")) {
+        if (selection.equalsIgnoreCase("N")) {
             continueLoop = false;
         }
         return continueLoop;
