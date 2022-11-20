@@ -66,8 +66,8 @@ public class Purchase {
                         System.out.println("Chew Chew, Yum!");
                     }
                     System.out.println("You have purchased " + matchedItem.getName() + " for $" + matchedItem.getPrice() + ".");
-                    Logger.logMessage(matchedItem.getName() + " " + matchedItem.getRowId() + " $" + matchedItem.getPrice()
-                            + " $" + (getMoneyAvailable() - matchedItem.getPrice()) );
+                    Logger.logMessage(matchedItem.getName() + " " + matchedItem.getRowId() + " $" + String.format("%.2f",matchedItem.getPrice())
+                            + " $" + String.format("%.2f", (getMoneyAvailable() - matchedItem.getPrice())) );
                 }
                 return totalCost;
             }
@@ -85,7 +85,7 @@ public class Purchase {
     public double transaction() {
             moneyAvailable -= totalCost;
             totalCost = 0;
-        System.out.println("Your remaining balance is $" + getMoneyAvailable());
+        System.out.println("Your remaining balance is $" + String.format("%.2f", getMoneyAvailable()));
         return moneyAvailable;
 
     }
@@ -109,7 +109,7 @@ public class Purchase {
 
         double displayChangeDue = (double) changeDue / 100;
 
-        return "\nTotal amount of change to give: $" + displayChangeDue + "\nNumber of quarters to give: " + numQuarters +
+        return "\nTotal amount of change to give: $" + String.format("%.2f", displayChangeDue) + "\nNumber of quarters to give: " + numQuarters +
                 "\nNumber of dimes to give: " + numDimes + "\nNumber of nickels to give: " + numNickels;
     }
 

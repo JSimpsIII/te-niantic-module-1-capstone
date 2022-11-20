@@ -64,7 +64,7 @@ public class VendingMachine
                 money = UserInput.getPayment();
                 purchase.feedMoney(money);
                 continueLoop = UserInput.continueOrNot();
-                Logger.logMessage("FEED MONEY $" + money + " $" + purchase.getMoneyAvailable());
+                Logger.logMessage("FEED MONEY $" + money + " $" + String.format("%.2f", purchase.getMoneyAvailable()));
             }
             purchase();
 
@@ -82,7 +82,7 @@ public class VendingMachine
             }
         } else if (option.equals("3")) {
             System.out.println();
-            Logger.logMessage("GIVE CHANGE: $" + purchase.getMoneyAvailable() + " $0.00");
+            Logger.logMessage("GIVE CHANGE: $" + String.format("%.2f", purchase.getMoneyAvailable()) + " $0.00");
             System.out.println(purchase.change());
         } else {
             System.out.println("Invalid option, please try again");
