@@ -3,6 +3,7 @@ package com.techelevator.UI;
 import com.techelevator.models.Inventory;
 import com.techelevator.models.Purchase;
 import com.techelevator.models.products.Product;
+import com.techelevator.view.Colors;
 
 import java.util.List;
 
@@ -11,39 +12,37 @@ public class UserOutput {
     public static void displayWelcomeScreen(){
 
         System.out.println();
-        System.out.println("*************************");
-        System.out.println("Welcome to Vend-Matic 800");
-        System.out.println("*************************");
+        System.out.println(Colors.YELLOW_BACKGROUND + Colors.BLACK + "╔═══════════════════════════╗" + Colors.RESET);
+        System.out.println(Colors.YELLOW_BACKGROUND + Colors.BLACK + "║ Welcome to Vend-Matic 800 ║" + Colors.RESET);
+        System.out.println(Colors.YELLOW_BACKGROUND + Colors.BLACK + "╚═══════════════════════════╝" + Colors.RESET);
     }
 
     public static void displayHomeScreenMenu(){
         System.out.println();
-        System.out.println("*********************");
-        System.out.println("Main Home Screen");
-        System.out.println("*********************");
-        System.out.println();
-        System.out.println("1) Display Vending Machine Items");
-        System.out.println("2) Purchase Menu");
-        System.out.println("3) Exit");
+        System.out.println(Colors.YELLOW + "╔═══════════╗" + Colors.RESET);
+        System.out.println(Colors.YELLOW + "║ Main Menu ║" + Colors.RESET);
+        System.out.println(Colors.YELLOW + "╚═══════════╝" + Colors.RESET);
+        System.out.println(Colors.BLUE + "1) Display Vending Machine Items" + Colors.RESET);
+        System.out.println(Colors.BLUE + "2) Purchase Menu" + Colors.RESET);
+        System.out.println(Colors.BLUE + "3) Exit" + Colors.RESET);
         System.out.println();
     }
 
 
     public static void displayInventory(List<Product> products) {
         System.out.println();
-        System.out.println("*********************");
-        System.out.println("Products");
-        System.out.println("*********************");
-        System.out.println();
+        System.out.println(Colors.YELLOW + "╔═══════════════════╗" + Colors.RESET);
+        System.out.println(Colors.YELLOW + "║ Product Inventory ║" + Colors.RESET);
+        System.out.println(Colors.YELLOW + "╚═══════════════════╝" + Colors.RESET);
 
         for (Product product : products) {
 
             if(product.getQuantity() == 0){
-                System.out.println(product.getRowId() + ") " + product.getName() + ", $" + product.getPrice()
-                        + ", SOLD OUT");
+                System.out.println(Colors.BLUE + product.getRowId() + ") " + product.getName() + ", $" + product.getPrice()
+                        + "," + Colors.RESET + Colors.RED + " SOLD OUT" + Colors.RESET);
             } else if (product.getQuantity() > 0) {
-                System.out.println(product.getRowId() + ") " + product.getName() + ", $" + product.getPrice()
-                        + ", In Stock: " + product.getQuantity());
+                System.out.println(Colors.BLUE + product.getRowId() + ") " + product.getName() + ", $" + product.getPrice()
+                        + ", In Stock: " + product.getQuantity() + Colors.RESET);
             } else {
                 // This should never be called
                 System.out.println("Trying to set quantity to -1.");
@@ -56,14 +55,15 @@ public class UserOutput {
 
     public static void displayPurchaseMenu(double moneyAvailable){
         System.out.println();
-        System.out.println("*********************");
-        System.out.println("Purchase Menu");
-        System.out.println("*********************");
-        System.out.println();
+        System.out.println(Colors.YELLOW + "╔═══════════════╗" + Colors.RESET);
+        System.out.println(Colors.YELLOW + "║ Purchase Menu ║" + Colors.RESET);
+        System.out.println(Colors.YELLOW + "╚═══════════════╝" + Colors.RESET);
         System.out.println("Current money provided: $" + String.format("%.2f", moneyAvailable));
-        System.out.println("1) Feed Money");
-        System.out.println("2) Select Product");
-        System.out.println("3) Finish Transaction");
+        System.out.println();
+        System.out.println(Colors.BLUE + "1) Feed Money" + Colors.RESET);
+        System.out.println(Colors.BLUE + "2) Select Product" + Colors.RESET);
+        System.out.println(Colors.BLUE + "3) Finish Transaction" + Colors.RESET);
+        System.out.println();
     }
 
 }

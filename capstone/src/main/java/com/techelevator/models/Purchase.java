@@ -4,6 +4,7 @@ import com.techelevator.UI.UserInput;
 import com.techelevator.UI.UserOutput;
 import com.techelevator.models.file_io.Logger;
 import com.techelevator.models.products.Product;
+import com.techelevator.view.Colors;
 
 public class Purchase {
 
@@ -37,6 +38,13 @@ public class Purchase {
 
     // method for choosing item ID selection
     // takes in inventory list and item ID(user input)
+
+    /**
+     * method for choosing item ID selection
+     * @param inventory
+     * @param item
+     * @return
+     */
     public double makeSelection(Inventory inventory, String item) {
         double price = 0;
         String newSelection = "";
@@ -59,11 +67,11 @@ public class Purchase {
 
                     // return to purchase menu to feed money (1)
                     if (selection.equals("1")){
-                        UserOutput.displayPurchaseMenu(getMoneyAvailable());
 
                     //display inventory and have user select another item
                     } else if (selection.equals("2")){
                         UserOutput.displayInventory(inventory.getProducts());
+                        System.out.println();
                         newSelection = UserInput.getItemSelection();
                         makeSelection(inventory, newSelection);
                     }
@@ -78,7 +86,10 @@ public class Purchase {
                     if (!successfullySetQuantity) {
                         UserOutput.displayInventory(inventory.getProducts());
                         System.out.println();
-                        System.out.println("The item " + newSelection + " is SOLD OUT. Please choose another.");
+                        System.out.println(Colors.RED + "....................................................." + Colors.RESET);
+                        System.out.println(Colors.RED + ": The item is SOLD OUT. Please choose another item. :" + Colors.RESET);
+                        System.out.println(Colors.RED + ":...................................................:" + Colors.RESET);
+                        System.out.println();
                         newSelection = UserInput.getItemSelection();
                         return makeSelection(inventory, newSelection);
                     }
@@ -88,17 +99,33 @@ public class Purchase {
 
                     //product type prints corresponding phrases
                     if (matchedItem.getProductType().equals("Chip")) {
-                        System.out.println("Crunch Crunch, Yum!");
+                        System.out.println();
+                        System.out.println(Colors.GREEN + "......................." + Colors.RESET);
+                        System.out.println(Colors.GREEN + ": Crunch Crunch, Yum! :" + Colors.RESET);
+                        System.out.println(Colors.GREEN + ":.....................:" + Colors.RESET);
                     } else if (matchedItem.getProductType().equals("Candy")) {
-                        System.out.println("Munch Munch, Yum!");
+                        System.out.println();
+                        System.out.println(Colors.GREEN + "....................." + Colors.RESET);
+                        System.out.println(Colors.GREEN + ": Munch Munch, Yum! :" + Colors.RESET);
+                        System.out.println(Colors.GREEN + ":...................:" + Colors.RESET);
                     } else if (matchedItem.getProductType().equals("Drink")) {
-                        System.out.println("Glug Glug, Yum!");
+                        System.out.println();
+                        System.out.println(Colors.GREEN + "..................." + Colors.RESET);
+                        System.out.println(Colors.GREEN + ": Glug Glug, Yum! :" + Colors.RESET);
+                        System.out.println(Colors.GREEN + ":.................:" + Colors.RESET);
                     } else if (matchedItem.getProductType().equals("Gum")) {
-                        System.out.println("Chew Chew, Yum!");
+                        System.out.println();
+                        System.out.println(Colors.GREEN + "..................." + Colors.RESET);
+                        System.out.println(Colors.GREEN + ": Chew Chew, Yum! :" + Colors.RESET);
+                        System.out.println(Colors.GREEN + ":.................:" + Colors.RESET);
                     }
 
                     // Dispensing an item prints the item name, cost, and the money remaining.
-                    System.out.println("You have purchased " + matchedItem.getName() + " for $" + matchedItem.getPrice() + ".");
+                    System.out.println();
+                    System.out.println("..................................................");
+                    System.out.println(" You have purchased " + matchedItem.getName() + " for $" + matchedItem.getPrice() + ". ");
+
+
                     Logger.logMessage(matchedItem.getName() + " " + matchedItem.getRowId() + " $" + String.format("%.2f",matchedItem.getPrice())
                             + " $" + String.format("%.2f", (getMoneyAvailable() - matchedItem.getPrice())) );
                 }
@@ -108,7 +135,10 @@ public class Purchase {
         }
             // If the product code doesn't exist, the vending machine informs the
             // customer and returns them to the Purchase menu.
-            System.out.println("Item doesn't exist, please choose a different item. ");
+            System.out.println(Colors.RED + "......................................................." + Colors.RESET);
+            System.out.println(Colors.RED + ": Item doesn't exist, please choose a different item. :" + Colors.RESET);
+            System.out.println(Colors.RED + ":.....................................................:" + Colors.RESET);
+            System.out.println();
             String stringReselection = UserInput.getItemSelection();
             makeSelection(inventory, stringReselection);
 
@@ -120,7 +150,9 @@ public class Purchase {
     public double transaction() {
             moneyAvailable -= totalCost;
             totalCost = 0;
-        System.out.println("Your remaining balance is $" + String.format("%.2f", getMoneyAvailable()));
+        System.out.println(" Your remaining balance is $" + String.format("%.2f", getMoneyAvailable()) + ". ");
+        System.out.println("..................................................");
+
         return moneyAvailable;
 
     }

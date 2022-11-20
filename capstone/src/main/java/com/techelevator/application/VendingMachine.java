@@ -5,6 +5,9 @@ import com.techelevator.UI.UserOutput;
 import com.techelevator.models.Inventory;
 import com.techelevator.models.Purchase;
 import com.techelevator.models.file_io.Logger;
+import com.techelevator.view.Colors;
+
+import java.awt.*;
 
 public class VendingMachine
 {
@@ -50,7 +53,9 @@ public class VendingMachine
 
             // if user input not 1, 2, or 3
             } else {
-                System.out.println("Invalid option, please try again");
+                System.out.println(Colors.RED + "...................................." + Colors.RESET);
+                System.out.println(Colors.RED + ": Invalid option, please try again :" + Colors.RESET);
+                System.out.println(Colors.RED + ":..................................:" + Colors.RESET);
             }
 
         }
@@ -72,7 +77,9 @@ public class VendingMachine
 
         //if user input not Yes or Menu
         } else {
-            System.out.println("Invalid option, please try again");
+            System.out.println(Colors.RED + "...................................." + Colors.RESET);
+            System.out.println(Colors.RED + ": Invalid option, please try again :" + Colors.RESET);
+            System.out.println(Colors.RED + ":..................................:" + Colors.RESET);
             promptTransaction();
         }
 
@@ -98,6 +105,7 @@ public class VendingMachine
                 boolean continueLoop = true;
                 while (continueLoop) {
                     money = UserInput.getPayment();
+                    System.out.println();
                     purchase.feedMoney(money);
                     continueLoop = UserInput.continueOrNot();
                     Logger.logMessage("FEED MONEY $" + money + " $" + String.format("%.2f", purchase.getMoneyAvailable()));
@@ -109,7 +117,9 @@ public class VendingMachine
 
                 //make sure user has inserted money before selecting an item for purchase
                 if (purchase.getMoneyAvailable() == 0){
-                    System.out.println("Please insert funds before choosing an item");
+                    System.out.println(Colors.RED + "................................................" + Colors.RESET);
+                    System.out.println(Colors.RED + ": Please insert funds before choosing an item. :" + Colors.RESET);
+                    System.out.println(Colors.RED + ":..............................................:" + Colors.RESET);
 
                 // display inventory, get user input(item ID)
                 // prints the item name, cost, and the money remaining
@@ -131,7 +141,9 @@ public class VendingMachine
 
             // if user input not 1, 2, or 3
             default:
-                System.out.println("Invalid option, please try again");
+                System.out.println(Colors.RED + "....................................." + Colors.RESET);
+                System.out.println(Colors.RED + ": Invalid option, please try again. :" + Colors.RESET);
+                System.out.println(Colors.RED + ":...................................:" + Colors.RESET);
                 break;
         }
 
