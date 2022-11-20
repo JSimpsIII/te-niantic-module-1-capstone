@@ -9,16 +9,21 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Inventory {
+
+    //create new arraylist for product inventory
     private List<Product> products = new ArrayList<>();
 
+    //getter
     public List<Product> getProducts() {
         return products;
     }
 
+    //empty constructor
     public Inventory() {
 
     }
 
+    //method to write inventory from .csv file to list
     public void loadInventory() {
 
         products = new ArrayList<>();
@@ -40,10 +45,10 @@ public class Inventory {
                 products.add(product);
             }
 
-
         } catch (FileNotFoundException e) {
-            System.out.println("logging file not found exception");;
-        } ;
+            System.out.println("logging file not found exception");
+        }
 
     }
+
 }

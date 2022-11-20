@@ -2,12 +2,14 @@ package com.techelevator.models.products;
 
 public class Product {
 
+    //instance variables
     private String rowId;
     private String name;
     private double price;
     private String productType;
     private int quantity;
 
+    //constructors
     public Product() {
 
     }
@@ -20,43 +22,36 @@ public class Product {
         this.quantity = 5;
     }
 
+    //getters and setters
     public String getRowId() {
         return rowId;
-    }
-
-    public void setRowId(String rowId) {
-        this.rowId = rowId;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public double getPrice() {
         return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     public String getProductType() {
         return productType;
     }
 
-    public void setProductType(String productType) {
-        this.productType = productType;
-    }
-
     public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    //create boolean for quantity
+    // should never be negative
+    public boolean setQuantity(int quantity) {
+        if(quantity < 0) {
+            return false;
+        }
+
         this.quantity = quantity;
+        return true;
     }
+
 }

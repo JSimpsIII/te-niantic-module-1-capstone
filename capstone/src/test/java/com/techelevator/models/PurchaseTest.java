@@ -5,6 +5,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+
 import static org.junit.Assert.*;
 
 public class PurchaseTest {
@@ -13,6 +17,11 @@ public class PurchaseTest {
 
     @Before
     public void setup() { purchase = new Purchase(); }
+
+    @After
+    public void clear(){
+        purchase.setMoneyAvailable(0);
+    }
 
     @Test
     public void feedMoney_ShouldAdd_GivenMoney_ToMoneyAvailable() {
@@ -61,7 +70,7 @@ public class PurchaseTest {
     @Test
     public void transaction_ShouldSubtract_TotalCost_From_MoneyAvailable() {
         // arrange
-        Purchase.setMoneyAvailable(10);
+        purchase.setMoneyAvailable(10);
         purchase.setTotalCost(3.05);
         double expected = 6.95;
 
@@ -77,7 +86,7 @@ public class PurchaseTest {
         // arrange
         Inventory inventory = new Inventory();
         inventory.loadInventory();
-        Purchase.setMoneyAvailable(2.15);
+        purchase.setMoneyAvailable(2.15);
 
         double changeDue = 2.15;
         int numQuarters = 8;
@@ -95,8 +104,5 @@ public class PurchaseTest {
         assertEquals("Because the user should receive the correct amount of change", expected, actual);
     }
 
-    @After
-    public void clear(){
-        Purchase.setMoneyAvailable(0);
-    }
+
 }

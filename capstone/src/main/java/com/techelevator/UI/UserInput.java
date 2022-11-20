@@ -1,12 +1,12 @@
 package com.techelevator.UI;
 
-import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class UserInput {
 
     private static Scanner input = new Scanner(System.in);
 
+    //prompts user to make selection in menu displayed
     public static String getMenuSelection(){
 
         System.out.println("Please make a selection: ");
@@ -15,6 +15,7 @@ public class UserInput {
         return selection;
     }
 
+    //prompts user for product ID from inventory list
     public static String getItemSelection() {
 
         System.out.println("Please enter item ID: ");
@@ -24,6 +25,7 @@ public class UserInput {
 
     }
 
+    //prompt user to insert correct bills for payment
     public static double getPayment() {
         System.out.println("Please Enter Whole Dollar Amount (1, 5, 10, or 20 dollar bills only): ");
 
@@ -44,7 +46,8 @@ public class UserInput {
         return 0;
     }
 
-    public static String readyToPay() {
+
+    public static String purchaseOrMainMenu() {
         System.out.println();
         System.out.println("Are you ready to make a purchase(Y) or go back (Menu)?");
         String selection = input.nextLine();
@@ -52,7 +55,7 @@ public class UserInput {
         return selection;
     }
 
-
+    //prompt user if they want to continue feeding money to machine
     public static boolean continueOrNot() {
         System.out.println("Do you want to add more money(Y/N)?");
         String selection = input.nextLine();
@@ -68,6 +71,7 @@ public class UserInput {
         }
         return continueLoop;
     }
+
 
     public static String insufficientFundsSelection(){
         System.out.println("Insufficient funds, press 1 to insert more money or press 2 to choose another item");

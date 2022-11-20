@@ -20,7 +20,7 @@ public class Logger {
         )
         {
             // open the log file to append and write the message
-            // format: <current time> <message>
+            // format: <current date, 12 hr time> <message>
             String dateStamp = LocalDate.now().toString();
 
             String pattern = "hh:mm:ss a";

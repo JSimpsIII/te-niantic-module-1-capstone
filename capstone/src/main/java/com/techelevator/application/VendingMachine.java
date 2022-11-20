@@ -8,85 +8,136 @@ import com.techelevator.models.file_io.Logger;
 
 public class VendingMachine
 {
+    //private class objects
     private Inventory inventory;
     private Purchase purchase;
 
+    //constructor
     public VendingMachine(){
         inventory = new Inventory();
         inventory.loadInventory();
         purchase = new Purchase();
     }
+
+    //method to begin application
     public void run()
     {
         // display home screen
         UserOutput.displayWelcomeScreen();
 
-        while(true)
+         while(true)
         {
-            // get user selection
+            // display home screen and get user selection
             UserOutput.displayHomeScreenMenu();
             String option = UserInput.getMenuSelection();
 
+            // "user selects 1) Display Vending Machine Items"
             if (option.equals("1")) {
-                UserOutput.displayInventory(inventory);
-                viewItems();
+                UserOutput.displayInventory(inventory.getProducts());
+
+                //and prompt user to make purchase or go back to menu
+                promptTransaction();
+
+            // "user selects 2) Purchase Menu"
             } else if (option.equals("2")) {
+
+                //call purchase method(below)
                 purchase();
+
+            // user selects (3) Exit
             } else if (option.equals("3")) {
-                break;
+                break; //application stops running
+
+            // if user input not 1, 2, or 3
             } else {
                 System.out.println("Invalid option, please try again");
             }
+
         }
+
     }
 
-    private void viewItems(){
-        String option = UserInput.readyToPay();
+    //prompt user to make purchase or go back to menu
+    private void promptTransaction(){
+        String option = UserInput.purchaseOrMainMenu();
 
+        //if (Y) call purchase method(below)
         if (option.equalsIgnoreCase("Y")) {
             purchase();
+
+        // if (menu)
         } else if (option.equalsIgnoreCase("Menu")) {
-            UserOutput.displayHomeScreenMenu();
-        } else {
-                System.out.println("Invalid option, please try again");
-                viewItems();
-            }
-        }
+            // Go back to Menu
+            return;
 
-    private void purchase(){
-        UserOutput.displayPurchase();
-        String option = UserInput.getMenuSelection();
-        double money = 0;
-
-        if (option.equals("1")) {
-            boolean continueLoop = true;
-            while (continueLoop) {
-                money = UserInput.getPayment();
-                purchase.feedMoney(money);
-                continueLoop = UserInput.continueOrNot();
-                Logger.logMessage("FEED MONEY $" + money + " $" + String.format("%.2f", purchase.getMoneyAvailable()));
-            }
-            purchase();
-
-        } else if (option.equals("2")) {
-            if (purchase.getMoneyAvailable() == 0){
-                System.out.println("Please insert funds before choosing an item");
-                purchase();
-            } else {
-                UserOutput.displayInventory(inventory);
-                System.out.println();
-                String item = UserInput.getItemSelection();
-                purchase.makeSelection(inventory, item);
-                purchase.transaction();
-                purchase();
-            }
-        } else if (option.equals("3")) {
-            System.out.println();
-            Logger.logMessage("GIVE CHANGE: $" + String.format("%.2f", purchase.getMoneyAvailable()) + " $0.00");
-            System.out.println(purchase.change());
+        //if user input not Yes or Menu
         } else {
             System.out.println("Invalid option, please try again");
-            purchase();
+            promptTransaction();
         }
+
     }
+
+    //user IO with purchase menu
+    private void purchase(){
+
+        // displays purchase menu, takes in money parameter
+        // prompt user for selection
+        UserOutput.displayPurchaseMenu(purchase.getMoneyAvailable());
+        String option = UserInput.getMenuSelection();
+
+        double money = 0;
+
+        //use switch for strict equal of strings
+        switch (option) {
+
+            // user selects 1) Feed Money
+            case "1":
+
+                //allows customer to repeatedly feed money into the machine in whole dollar amounts.
+                boolean continueLoop = true;
+                while (continueLoop) {
+                    money = UserInput.getPayment();
+                    purchase.feedMoney(money);
+                    continueLoop = UserInput.continueOrNot();
+                    Logger.logMessage("FEED MONEY $" + money + " $" + String.format("%.2f", purchase.getMoneyAvailable()));
+                }
+                break;
+
+            // user selects (2) Select Product
+            case "2":
+
+                //make sure user has inserted money before selecting an item for purchase
+                if (purchase.getMoneyAvailable() == 0){
+                    System.out.println("Please insert funds before choosing an item");
+
+                // display inventory, get user input(item ID)
+                // prints the item name, cost, and the money remaining
+                } else {
+                    UserOutput.displayInventory(inventory.getProducts());
+                    System.out.println();
+                    String item = UserInput.getItemSelection();
+                    purchase.makeSelection(inventory, item);
+                    purchase.transaction();
+                }
+                break;
+
+            // user selects (3) Finish Transaction
+            case "3":
+                System.out.println();
+                Logger.logMessage("GIVE CHANGE: $" + String.format("%.2f", purchase.getMoneyAvailable()) + " $0.00");
+                System.out.println(purchase.change()); //print out change in coins
+                return; //return out of function instead of calling purchase (end)
+
+            // if user input not 1, 2, or 3
+            default:
+                System.out.println("Invalid option, please try again");
+                break;
+        }
+
+        //call purchase at the end
+        purchase();
+
+    }
+
 }
