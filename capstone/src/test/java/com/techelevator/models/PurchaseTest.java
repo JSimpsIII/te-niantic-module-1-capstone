@@ -1,5 +1,6 @@
 package com.techelevator.models;
 
+import com.techelevator.UI.UserInput;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,6 +34,7 @@ public class PurchaseTest {
         //arrange
         Inventory inventory = new Inventory();
         inventory.loadInventory();
+        purchase.setMoneyAvailable(10);
 
         double gumExpected = 0.75;
         double drinkExpected = 1.5;

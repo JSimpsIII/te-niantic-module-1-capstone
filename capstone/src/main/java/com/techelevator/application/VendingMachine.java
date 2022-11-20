@@ -45,8 +45,6 @@ public class VendingMachine
 
         if (option.equalsIgnoreCase("Y")) {
             purchase();
-        } else if (option.equalsIgnoreCase("N")) {
-            viewItems();
         } else if (option.equalsIgnoreCase("Menu")) {
             UserOutput.displayHomeScreenMenu();
         } else {
@@ -74,13 +72,14 @@ public class VendingMachine
             if (purchase.getMoneyAvailable() == 0){
                 System.out.println("Please insert funds before choosing an item");
                 purchase();
+            } else {
+                UserOutput.displayInventory(inventory);
+                System.out.println();
+                String item = UserInput.getItemSelection();
+                purchase.makeSelection(inventory, item);
+                purchase.transaction();
+                purchase();
             }
-            UserOutput.displayInventory(inventory);
-            System.out.println();
-            String item = UserInput.getItemSelection();
-            purchase.makeSelection(inventory, item);
-            purchase.transaction();
-            purchase();
         } else if (option.equals("3")) {
             System.out.println();
             Logger.logMessage("GIVE CHANGE: $" + purchase.getMoneyAvailable() + " $0.00");

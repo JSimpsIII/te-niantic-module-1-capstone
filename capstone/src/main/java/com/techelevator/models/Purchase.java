@@ -40,7 +40,7 @@ public class Purchase {
         Product matchedItem = new Product();
 
         for(Product product : inventory.getProducts()) {
-            if(item.equals(product.getRowId())) {
+            if(item.equalsIgnoreCase(product.getRowId())) {
                 matchedItem = product;
                 price = matchedItem.getPrice();
                 if (price > getMoneyAvailable()) {
@@ -83,12 +83,8 @@ public class Purchase {
 
 
     public double transaction() {
-        if (moneyAvailable >= totalCost) {
             moneyAvailable -= totalCost;
             totalCost = 0;
-        } else if (moneyAvailable < totalCost) {
-            //insert insufficient funds exception
-        }
         System.out.println("Your remaining balance is $" + getMoneyAvailable());
         return moneyAvailable;
 
@@ -108,12 +104,6 @@ public class Purchase {
         int numQuarters = (changeDue - modQuarters) / QUARTER;
         int numDimes = (modQuarters - modDimes) / DIME;
         int numNickels = (modDimes - modNickels) / NICKEL;
-
-//        System.out.println("\nTotal amount of change to give: $" + changeDue);
-//        System.out.println("Number of quarters to give: " + numQuarters);
-//        System.out.println("Number of dimes to give: " + numDimes);
-//        System.out.println("Number of nickels to give: " + numNickels);
-//        System.out.println("Number of pennies to give: " + numPennies);
 
         moneyAvailable = 0;
 

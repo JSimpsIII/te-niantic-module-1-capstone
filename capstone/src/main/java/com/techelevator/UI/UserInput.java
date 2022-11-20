@@ -26,20 +26,27 @@ public class UserInput {
 
     public static double getPayment() {
         System.out.println("Please Enter Whole Dollar Amount (1, 5, 10, or 20 dollar bills only): ");
-        double amount = Double.parseDouble(input.nextLine());
-        while (amount != 1 && amount != 5 && amount != 10 && amount != 20) {
-            System.out.println("This machine only accepts 1's, 5's, 10's, and 20's");
-            System.out.println();
-            System.out.println("Please Enter Whole Dollar Amount (1, 5, 10, or 20 dollar bills only): ");
-            amount = Double.parseDouble(input.nextLine());
-        }
-        return amount;
 
+            try {
+                double amount = Double.parseDouble(input.nextLine());
+                while (amount != 1 && amount != 5 && amount != 10 && amount != 20) {
+                    System.out.println("This machine only accepts 1's, 5's, 10's, and 20's");
+                    System.out.println();
+                    System.out.println("Please Enter Whole Dollar Amount (1, 5, 10, or 20 dollar bills only): ");
+                amount = Double.parseDouble(input.nextLine());
+            }
+                return amount;
+
+            } catch(NumberFormatException e)
+            {
+                System.out.println("Invalid input, please try again");
+            }
+        return 0;
     }
 
     public static String readyToPay() {
         System.out.println();
-        System.out.println("Are you ready to make a purchase(Y/N) or go back (Menu)?");
+        System.out.println("Are you ready to make a purchase(Y) or go back (Menu)?");
         String selection = input.nextLine();
 
         return selection;
