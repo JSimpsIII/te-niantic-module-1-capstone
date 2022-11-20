@@ -121,7 +121,6 @@ public class Purchase {
                     }
 
                     // Dispensing an item prints the item name, cost, and the money remaining.
-                    System.out.println();
                     System.out.println("..................................................");
                     System.out.println(" You have purchased " + matchedItem.getName() + " for $" + matchedItem.getPrice() + ". ");
 
@@ -184,7 +183,7 @@ public class Purchase {
         //convert change amount back to double for printout
         double displayChangeDue = (double) changeDue / 100;
 
-        return "\nTotal amount of change to give: $" + String.format("%.2f", displayChangeDue) + "\nNumber of quarters to give: " + numQuarters +
+        return "Total amount of change to give: $" + String.format("%.2f", displayChangeDue) + "\nNumber of quarters to give: " + numQuarters +
                 "\nNumber of dimes to give: " + numDimes + "\nNumber of nickels to give: " + numNickels;
     }
 

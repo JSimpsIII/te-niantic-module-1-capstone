@@ -13,7 +13,6 @@ public class UserInput {
 
         System.out.println("Please make a selection: ");
         String selection = input.nextLine();
-        System.out.println();
 
         return selection;
     }
@@ -30,6 +29,7 @@ public class UserInput {
 
     //prompt user to insert correct bills for payment
     public static double getPayment() {
+        System.out.println();
         System.out.println("Please Enter Whole Dollar Amount (1, 5, 10, or 20 dollar bills only): ");
 
             try {
@@ -41,8 +41,6 @@ public class UserInput {
                     System.out.println();
                     System.out.println("Please Enter Whole Dollar Amount (1, 5, 10, or 20 dollar bills only): ");
                     amount = Double.parseDouble(input.nextLine());
-                    System.out.println();
-
                 }
                 return amount;
 
@@ -68,7 +66,7 @@ public class UserInput {
     public static boolean continueOrNot() {
         System.out.println("Do you want to add more money(Y/N)?");
         String selection = input.nextLine();
-        System.out.println();
+//        System.out.println();
         boolean continueLoop = true;
         while (!selection.equalsIgnoreCase("Y") && !selection.equalsIgnoreCase("N")) {
             System.out.println(Colors.RED + "....................................." + Colors.RESET);

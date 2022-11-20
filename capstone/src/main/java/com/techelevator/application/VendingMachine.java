@@ -49,6 +49,10 @@ public class VendingMachine
 
             // user selects (3) Exit
             } else if (option.equals("3")) {
+                System.out.println();
+                System.out.println(Colors.YELLOW_BACKGROUND + Colors.BLACK + "╔════════════════════════════════════╗" + Colors.RESET);
+                System.out.println(Colors.YELLOW_BACKGROUND + Colors.BLACK + "║ Thank you for using Vend-Matic 800 ║" + Colors.RESET);
+                System.out.println(Colors.YELLOW_BACKGROUND + Colors.BLACK + "╚════════════════════════════════════╝" + Colors.RESET);
                 break; //application stops running
 
             // if user input not 1, 2, or 3
@@ -134,9 +138,14 @@ public class VendingMachine
 
             // user selects (3) Finish Transaction
             case "3":
-                System.out.println();
                 Logger.logMessage("GIVE CHANGE: $" + String.format("%.2f", purchase.getMoneyAvailable()) + " $0.00");
+                System.out.println();
+                System.out.println(Colors.GREEN + "........................" + Colors.RESET);
+                System.out.println(Colors.GREEN + ": Transaction complete :" + Colors.RESET);
+                System.out.println(Colors.GREEN + ":......................:" + Colors.RESET);
+                System.out.println("..................................................");
                 System.out.println(purchase.change()); //print out change in coins
+                System.out.println("..................................................");
                 return; //return out of function instead of calling purchase (end)
 
             // if user input not 1, 2, or 3
